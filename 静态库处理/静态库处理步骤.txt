@@ -1,0 +1,25 @@
+1.新建项目-> 选择 “Cocoa Touch Static Library”
+2.然后build一个模拟器的.a文件和一个真机的.a
+3.lipo两个.a为一个文件 http://blog.csdn.net/coooliang/article/details/44458973
+
+
+文章部分内容转载自：http://blog.csdn.net/yangtb2010/article/details/8916442
+
+貌似他也是转载的...
+
+使用mac可以直接在终端使用：
+
+lipo -create SQY/iOS/iphoneos/libGamePlusAPI.a SQY/iOS/iphonesimulator/libGamePlusAPI.a  -output SQY/iOS/libGamePus.a
+
+其中SQY/iOS/iphoneos/libGamePlusAPI.a //为真机库。  
+SQY/iOS/iphonesimulator/libGamePlusAPI.a //为模拟器库 
+-output SQY/iOS/libGamePus.a //为两个合并后存放的路径
+
+然后可以输入命令测试下是否成功  
+lipo -info SQY/iOS/libGamePus.a  //下面是输出 armv7 i386 有了两个就表情模拟器和真机都支持  其中armv7为真机架构 i386为模拟器
+Architectures in the fat file: SQY/iOS/libGamePus.a are: armv7 i386
+
+
+Xcode中的Aggregate中创建run script可实现自动lipo
+
+
